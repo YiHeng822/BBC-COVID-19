@@ -319,9 +319,10 @@ From the table above, it can be noticed that several states are strongly correla
 On the other hand, we can see that Kedah, Perak, and Terengganu are strongly correlated with Pahang as their correlation score with Pahang state is close to 1 as well. An illustration of the correlation is shown in Figure 9.
 """
 
-fig11, ax = plt.subplots()
-sns.heatmap(corrM.head(2))
-st.pyplot(fig11)
+# fig11, ax = plt.subplots()
+# sns.heatmap(corrM.head(2))
+# st.pyplot(fig11)
+st.image("./figure/9.png")
 
 """Figure 9: The correlation matrix of Johor and Pahang with other states
 
@@ -382,13 +383,13 @@ Before the data can be used as the input of the feature selector, the data frame
 #Pahang boruta feature score
 y_pahang = merge[0].Cases_New_Pahang
 X_pahang = merge[0].drop(['date','Cases_New_Pahang'], axis=1)
-colnames = X_pahang.columns
+# colnames = X_pahang.columns
 
-feat_selector.fit(X_pahang.values,y_pahang.values)
+# feat_selector.fit(X_pahang.values,y_pahang.values)
 
-boruta_score_pahang = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
-boruta_score_pahang = pd.DataFrame(list(boruta_score_pahang.items()), columns=['Features','Score'])
-boruta_score_pahang = boruta_score_pahang.sort_values("Score", ascending=False)
+# boruta_score_pahang = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
+# boruta_score_pahang = pd.DataFrame(list(boruta_score_pahang.items()), columns=['Features','Score'])
+# boruta_score_pahang = boruta_score_pahang.sort_values("Score", ascending=False)
 
 st.dataframe(pd.DataFrame(X_pahang).head(5))
 """
@@ -400,109 +401,115 @@ st.dataframe(pd.DataFrame(y_pahang).head(5))
 Data Frame 16: Example of label(y) for Pahang
 """
 
-fig13, ax = plt.subplots()
-fig13 = sns.catplot(x="Score", y="Features", data=boruta_score_pahang[0:10], kind="bar", 
-              height=14, aspect=1.9, palette="coolwarm")
-plt.title("Pahang Boruta Top 10 Features")
-st.pyplot(fig13)
+# fig13, ax = plt.subplots()
+# fig13 = sns.catplot(x="Score", y="Features", data=boruta_score_pahang[0:10], kind="bar", 
+#               height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Pahang Boruta Top 10 Features")
+# st.pyplot(fig13)
+st.image("./figure/10.png")
 """Figure 10: The top 10 features of Pahang state selected by Boruta. """
 
 #Kedah boruta score
 y_kedah = merge[1].Cases_New_Kedah
 X_kedah = merge[1].drop(['date','Cases_New_Kedah'], axis=1)
-colnames = X_kedah.columns
+# colnames = X_kedah.columns
 
-feat_selector.fit(X_kedah.values,y_kedah.values)
+# feat_selector.fit(X_kedah.values,y_kedah.values)
 
-boruta_score_kedah = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
-boruta_score_kedah = pd.DataFrame(list(boruta_score_kedah.items()), columns=['Features','Score'])
-boruta_score_kedah = boruta_score_kedah.sort_values("Score", ascending=False)
+# boruta_score_kedah = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
+# boruta_score_kedah = pd.DataFrame(list(boruta_score_kedah.items()), columns=['Features','Score'])
+# boruta_score_kedah = boruta_score_kedah.sort_values("Score", ascending=False)
 
-fig14, ax = plt.subplots()
-fig14 = sns.catplot(x="Score", y="Features", data=boruta_score_kedah[0:10], kind="bar", 
-              height=14, aspect=1.9, palette="coolwarm")
-plt.title("Kedah Boruta Top 10 Features")
-st.pyplot(fig14)
+# fig14, ax = plt.subplots()
+# fig14 = sns.catplot(x="Score", y="Features", data=boruta_score_kedah[0:10], kind="bar", 
+#               height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Kedah Boruta Top 10 Features")
+# st.pyplot(fig14)
+st.image("./figure/11.png")
 """Figure 11: The top 10 features of Kedah state selected by Boruta"""
 
 #Johor Boruta Score
 y_johor = merge[2].Cases_New_Johor
 X_johor = merge[2].drop(['date','Cases_New_Johor'], axis=1)
-colnames = X_johor.columns
+# colnames = X_johor.columns
 
-feat_selector.fit(X_johor.values,y_johor.values)
-boruta_score_johor = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
-boruta_score_johor = pd.DataFrame(list(boruta_score_johor.items()), columns=['Features','Score'])
-boruta_score_johor = boruta_score_johor.sort_values("Score", ascending=False)
+# feat_selector.fit(X_johor.values,y_johor.values)
+# boruta_score_johor = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
+# boruta_score_johor = pd.DataFrame(list(boruta_score_johor.items()), columns=['Features','Score'])
+# boruta_score_johor = boruta_score_johor.sort_values("Score", ascending=False)
 
-fig15, ax = plt.subplots()
-fig15 = sns.catplot(x="Score", y="Features", data=boruta_score_johor[0:10], kind="bar", 
-              height=14, aspect=1.9, palette="coolwarm")
-plt.title("Johor Boruta Top 10 Features")
-st.pyplot(fig15)
+# fig15, ax = plt.subplots()
+# fig15 = sns.catplot(x="Score", y="Features", data=boruta_score_johor[0:10], kind="bar", 
+#               height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Johor Boruta Top 10 Features")
+# st.pyplot(fig15)
+st.image("./figure/12.png")
 """Figure 12: The top 10 features of Johor state selected by Boruta."""
 
 #Selangor Boruta Score
 y_selangor = merge[3].Cases_New_Selangor
 X_selangor = merge[3].drop(['date','Cases_New_Selangor'], axis=1)
-colnames = X_selangor.columns
+# colnames = X_selangor.columns
 
-feat_selector.fit(X_selangor.values,y_selangor.values)
-boruta_score_selangor = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
-boruta_score_selangor = pd.DataFrame(list(boruta_score_selangor.items()), columns=['Features','Score'])
-boruta_score_selangor = boruta_score_selangor.sort_values("Score", ascending=False)
+# feat_selector.fit(X_selangor.values,y_selangor.values)
+# boruta_score_selangor = ranking(list(map(float, feat_selector.ranking_)), colnames, order=-1)
+# boruta_score_selangor = pd.DataFrame(list(boruta_score_selangor.items()), columns=['Features','Score'])
+# boruta_score_selangor = boruta_score_selangor.sort_values("Score", ascending=False)
 
-fig16, ax = plt.subplots()
-fig16 = sns.catplot(x="Score", y="Features", data=boruta_score_selangor[0:10], kind="bar", height=14, aspect=1.9, palette="coolwarm")
-plt.title("Selangor Boruta Top 10 Features")
-st.pyplot(fig16)
+# fig16, ax = plt.subplots()
+# fig16 = sns.catplot(x="Score", y="Features", data=boruta_score_selangor[0:10], kind="bar", height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Selangor Boruta Top 10 Features")
+# st.pyplot(fig16)
+st.image("./figure/13.png")
 """Figure 13: The top 10 features of Selangor state selected by Boruta."""
 
 #Pahang RFE Score
-rfe = RFECV(rf, min_features_to_select=1, cv=2)
-rfe.fit(X_pahang.values, y_pahang.values)
-colnames = X_pahang.columns
+# rfe = RFECV(rf, min_features_to_select=1, cv=2)
+# rfe.fit(X_pahang.values, y_pahang.values)
+# colnames = X_pahang.columns
 
-pahang_rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
-pahang_rfe_score = pd.DataFrame(list(pahang_rfe_score.items()), columns=['Features','Score'])
-pahang_rfe_score = pahang_rfe_score.sort_values("Score", ascending=False)
+# pahang_rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
+# pahang_rfe_score = pd.DataFrame(list(pahang_rfe_score.items()), columns=['Features','Score'])
+# pahang_rfe_score = pahang_rfe_score.sort_values("Score", ascending=False)
 
-fig17, ax = plt.subplots()
-fig17= sns.catplot(x="Score", y="Features", data=pahang_rfe_score[0:10], kind="bar", 
-               height=14, aspect=1.9, palette="coolwarm")
-plt.title("Pahang RFE Top 10 Features")
-st.pyplot(fig17)
+# fig17, ax = plt.subplots()
+# fig17= sns.catplot(x="Score", y="Features", data=pahang_rfe_score[0:10], kind="bar", 
+#                height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Pahang RFE Top 10 Features")
+# st.pyplot(fig17)
+st.image("./figure/14.png")
 """Figure 14: The top 10 features of Pahang state selected by RFE."""
 
 #Kedah RFE Score
-rfe.fit(X_kedah.values, y_kedah.values)
-colnames = X_kedah.columns
+# rfe.fit(X_kedah.values, y_kedah.values)
+# colnames = X_kedah.columns
 
-kedah_rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
-kedah_rfe_score = pd.DataFrame(list(kedah_rfe_score.items()), columns=['Features','Score'])
-kedah_rfe_score = kedah_rfe_score.sort_values("Score", ascending=False)
+# kedah_rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
+# kedah_rfe_score = pd.DataFrame(list(kedah_rfe_score.items()), columns=['Features','Score'])
+# kedah_rfe_score = kedah_rfe_score.sort_values("Score", ascending=False)
 
-fig18, ax = plt.subplots()
-fig18 = sns.catplot(x="Score", y="Features", data=kedah_rfe_score[0:10], kind="bar", 
-               height=14, aspect=1.9, palette="coolwarm")
-plt.title("Kedah RFE Top 10 Features")
-st.pyplot(fig18)
-
+# fig18, ax = plt.subplots()
+# fig18 = sns.catplot(x="Score", y="Features", data=kedah_rfe_score[0:10], kind="bar", 
+#                height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Kedah RFE Top 10 Features")
+# st.pyplot(fig18)
+st.image("./figure/15.png")
 """Figure 15: The top 10 features of Kedah state selected by RFE."""
 
 #Johor RFE Score
-rfe.fit(X_johor.values, y_johor.values)
+# rfe.fit(X_johor.values, y_johor.values)
 colnames = X_johor.columns
 
-johor_rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
-johor_rfe_score = pd.DataFrame(list(johor_rfe_score.items()), columns=['Features','Score'])
-johor_rfe_score = johor_rfe_score.sort_values("Score", ascending=False)
+# johor_rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
+# johor_rfe_score = pd.DataFrame(list(johor_rfe_score.items()), columns=['Features','Score'])
+# johor_rfe_score = johor_rfe_score.sort_values("Score", ascending=False)
 
-fig19, ax = plt.subplots()
-fig19 = sns.catplot(x="Score", y="Features", data=johor_rfe_score[0:10], kind="bar", 
-               height=14, aspect=1.9, palette="coolwarm")
-plt.title("Johor RFE Top 10 Features")
-st.pyplot(fig19)
+# fig19, ax = plt.subplots()
+# fig19 = sns.catplot(x="Score", y="Features", data=johor_rfe_score[0:10], kind="bar", 
+#                height=14, aspect=1.9, palette="coolwarm")
+# plt.title("Johor RFE Top 10 Features")
+# st.pyplot(fig19)
+st.image("./figure/16.png")
 """Figure 16: The top 10 features of Johor state selected by RFE.
 
 # Predictive Modelling
@@ -520,19 +527,19 @@ for i in range(1, len(y_pahang_change)):
 
 y_pahang_change[0] = y_pahang_change[1]
 
-merged_rank_ph =  boruta_score_pahang[0:10].join(pahang_rfe_score[0:10], lsuffix="Boruta", rsuffix="RFE")
-merged_rank_ph['Total'] = merged_rank_ph['ScoreBoruta'] + merged_rank_ph['ScoreRFE']
+# merged_rank_ph =  boruta_score_pahang[0:10].join(pahang_rfe_score[0:10], lsuffix="Boruta", rsuffix="RFE")
+# merged_rank_ph['Total'] = merged_rank_ph['ScoreBoruta'] + merged_rank_ph['ScoreRFE']
 
 #X_pahang_top5 = X_pahang[['hosp_pui','RTk_test_Pahang','admitted_total','discharged_pui','discharged_covid']]
-X_pahang_top5 = X_pahang[['hosp_pui','RTk_test_Pahang','hosp_noncovid','hosp_covid','discharged_covid']]
+X_pahang_top5 = X_pahang[['PCR_Pahang','RTk_test_Pahang','hosp_covid','discharged_covid','discharged_total']]
 X_train_pahang, X_test_pahang, y_train_pahang, y_test_pahang = train_test_split(X_pahang_top5, y_pahang_change, test_size=0.30, random_state=0)
 X_train_pahang_reg, X_test_pahang_reg, y_train_pahang_reg, y_test_pahang_reg = train_test_split(X_pahang_top5, y_pahang, test_size=0.30, random_state=0)
 
-st.dataframe(X_pahang_top5.head(5))
+st.image("./figure/17.png")
 """
-Data Frame 17: Dataframe of top 5 features of Pahang State
+Figure 17: Top 5 features of Pahang State
 
-The dataframe above shows the top 5 features choosen for Pahang state based on boruta and rfe score to fit in our model later which were hosp_pui, Rtk_test_pahang, hosp_noncovid, hosp_covid and discharged_covid.
+The figure above shows the top 5 features chosen for Pahang state based on Boruta and RFE score to fit in our model later which were *RTk_test_Pahang, PCR_Pahang, discharged_covid, hasp_covid, discharged_total*.
 """
 
 # Preparing data for Kedah
@@ -545,19 +552,19 @@ for i in range(1, len(y_kedah_change)):
 
 y_kedah_change[0] = y_kedah_change[1]
 
-merged_rank_kd =  boruta_score_kedah[0:10].join(kedah_rfe_score[0:10], lsuffix="Boruta", rsuffix="RFE")
-merged_rank_kd['Total'] = merged_rank_kd['ScoreBoruta'] + merged_rank_kd['ScoreRFE']
+# merged_rank_kd =  boruta_score_kedah[0:10].join(kedah_rfe_score[0:10], lsuffix="Boruta", rsuffix="RFE")
+# merged_rank_kd['Total'] = merged_rank_kd['ScoreBoruta'] + merged_rank_kd['ScoreRFE']
 
 #X_kedah_top5 = X_kedah[['hosp_covid','RTk_test_Kedah','PCR_Kedah','discharged_total','admitted_total']]
-X_kedah_top5 = X_kedah[['hosp_covid','RTk_test_Kedah','PCR_Kedah','hosp_noncovid','hosp_pui']]
+X_kedah_top5 = X_kedah[['PCR_Kedah','RTk_test_Kedah','admitted_covid','admitted_total','discharged_covid']]
 X_train_kedah, X_test_kedah, y_train_kedah, y_test_kedah = train_test_split(X_kedah_top5, y_kedah_change, test_size=0.30, random_state=0)
 X_train_kedah_reg, X_test_kedah_reg, y_train_kedah_reg, y_test_kedah_reg = train_test_split(X_kedah_top5, y_kedah, test_size=0.30, random_state=0)
 
-st.dataframe(X_kedah_top5.head(5))
+st.image("./figure/18.png")
 """
-Data Frame 18: Dataframe of top 5 features of Kedah State
+Figure 18: Top 5 features of Kedah State
 
-The dataframe above shows the top 5 features choosen for Kedah state based on boruta and rfe score to fit in our model later which were hosp_covid, Rtk_test_Kedah, PCR_kedah, hosp_noncovid and hosp_pui.
+The figure above shows the top 5 features chosen for Kedah state based on Boruta and RFE score to fit in our model later which were *PCR_Kedah, RTk_test_Kedah, admitted_covid, admitted_total, discharged_covid.*
 """
 
 # Preparing data for Johor
@@ -570,20 +577,20 @@ for i in range(1, len(y_johor_change)):
 
 y_johor_change[0] = y_johor_change[1]
 
-merged_rank_jh =  boruta_score_johor[0:10].join(johor_rfe_score[0:10], lsuffix="Boruta", rsuffix="RFE")
-merged_rank_jh['Total'] = merged_rank_jh['ScoreBoruta'] + merged_rank_jh['ScoreRFE']
+# merged_rank_jh =  boruta_score_johor[0:10].join(johor_rfe_score[0:10], lsuffix="Boruta", rsuffix="RFE")
+# merged_rank_jh['Total'] = merged_rank_jh['ScoreBoruta'] + merged_rank_jh['ScoreRFE']
 
 #X_johor_top5 = X_johor[['RTk_test_Johor','admitted_pui','hosp_covid','hosp_noncovid','admitted_total']]
-X_johor_top5 = X_johor[['hosp_pui','hosp_covid','admitted_covid','discharged_covid','hosp_noncovid']]
+X_johor_top5 = X_johor[['admitted_pui', 'hosp_pui', 'discharged_total', 'discharged_covid', 'PCR_Johor']]
 
 X_train_johor, X_test_johor, y_train_johor, y_test_johor = train_test_split(X_johor_top5, y_johor_change, test_size=0.30, random_state=0)
 X_train_johor_reg, X_test_johor_reg, y_train_johor_reg, y_test_johor_reg = train_test_split(X_johor_top5, y_johor, test_size=0.30, random_state=0)
 
-st.dataframe(X_johor_top5.head(5))
+st.image("./figure/19.png")
 """
-Data Frame 19: Dataframe of top 5 features of Johor State
+Figure 19: Top 5 features of Johor State
 
-The dataframe above shows the top 5 features choosen for Johor state based on boruta and rfe score to fit in our model later which were hosp_pui, hosp_covid, admitted_covid, discharged_covid, hosp_noncovid.
+The figure above shows the top 5 features chosen for Johor state based on Boruta and RFE score to fit in our model later which were *admitted_pui, hosp_pui, discharged_total, discharged_covid, PCR_Johor.*
 """
 
 # Preparing data for Selangor
@@ -596,18 +603,18 @@ for i in range(1, len(y_selangor_change)):
 
 y_selangor_change[0] = y_selangor_change[1]
 
-merged_rank_sl =  boruta_score_selangor[0:10]
+# merged_rank_sl =  boruta_score_selangor[0:10]
 
-X_selangor_top5 = X_selangor[['discharged_covid','RTk_test_Selangor','admitted_total','admitted_covid','admitted_pui']]
+X_selangor_top5 = X_selangor[['RTk_test_Selangor', 'PCR_Selangor', 'admitted_covid', 'admitted_total', 'discharged_pui']]
 X_train_selangor, X_test_selangor, y_train_selangor, y_test_selangor = train_test_split(X_selangor_top5, y_selangor_change, test_size=0.30, random_state=0)
 X_train_selangor_reg, X_test_selangor_reg, y_train_selangor_reg, y_test_selangor_reg = train_test_split(X_selangor_top5, y_selangor, test_size=0.30, random_state=0)
 
-st.dataframe(X_selangor_top5.head(5))
+st.image("./figure/20.png")
 
 """
-Data Frame 20: Dataframe of top 5 features of Selangor State
+Figure 20: Top 5 features of Selangor State
 
-The dataframe above shows the top 5 features choosen for Selangor state based on boruta score to fit in our model later which were discharged_covid, Rtk_Test_Selangor, admitted_total, admitted_covid, admitted_pui.
+The figure above shows the top 5 features chosen for Selangor state based on Boruta score to fit in our model later which were *RTk_test_Selangor, PCR_Selangor, admitted_covid, admitted_total, discharged_pui.*
 """
 st.info("NOTE: Due to Selangor state data is unable to fit into RFE, the top 5 features for Selangor is choosen based on Boruta score only")
 
@@ -757,7 +764,7 @@ plt.title('Confusion matrix Pahang', y=1.1)
 plt.ylabel('Actual label Pahang')
 plt.xlabel('Predicted label Pahang')
 st.pyplot(fig20)
-"""Figure 17: Confusion Matrix for Pahang State using Logistic Regression """
+"""Figure 21: Confusion Matrix for Pahang State using Logistic Regression """
 
 # Kedah Logistic Regression
 log_reg_k = LogisticRegression()
@@ -783,7 +790,7 @@ plt.title('Confusion matrix Kedah', y=1.1)
 plt.ylabel('Actual label Kedah')
 plt.xlabel('Predicted label Kedah')
 st.pyplot(fig21)
-"""Figure 18: Confusion Matrix for Kedah State using Logistic Regression """
+"""Figure 22: Confusion Matrix for Kedah State using Logistic Regression """
 
 # Johor Logistic Regression
 log_reg_j = LogisticRegression()
@@ -810,7 +817,7 @@ plt.ylabel('Actual label Johor')
 plt.xlabel('Predicted label Johor')
 st.pyplot(fig22)
 
-"""Figure 19: Confusion Matrix for Johor State using Logistic Regression """
+"""Figure 23: Confusion Matrix for Johor State using Logistic Regression """
 
 # Selangor Logistic Regression
 log_reg_p = LogisticRegression()
@@ -835,7 +842,7 @@ plt.title('Confusion matrix Selangor', y=1.1)
 plt.ylabel('Actual label Selangor')
 plt.xlabel('Predicted label Selangor')
 st.pyplot(fig23)
-"""Figure 20: Confusion Matrix for Selangor State using Logistic Regression"""
+"""Figure 24: Confusion Matrix for Selangor State using Logistic Regression"""
 
 """Logistic Regression performace comparision for each state"""
 states = [["Pahang", "Kedah", "Johor","Selangor"]]
@@ -875,7 +882,7 @@ plt.ylabel('Actual label Pahang')
 plt.xlabel('Predicted label Pahang')
 st.pyplot(fig24)
 
-"""Figure 21: Confusion Matrix for Pahang State using Decision Tree Classification """
+"""Figure 25: Confusion Matrix for Pahang State using Decision Tree Classification """
 
 #Kedah Classifier
 clf_kedah = DecisionTreeClassifier(criterion="entropy", max_depth=5)
@@ -902,7 +909,7 @@ plt.ylabel('Actual label Kedah')
 plt.xlabel('Predicted label Kedah')
 st.pyplot(fig25)
 
-"""Figure 22: Confusion Matrix for Kedah State using Decision Tree Classification """
+"""Figure 26: Confusion Matrix for Kedah State using Decision Tree Classification """
 
 #Johor Classifier
 clf_johor = DecisionTreeClassifier(criterion="entropy", max_depth=5)
@@ -929,7 +936,7 @@ plt.ylabel('Actual label Johor')
 plt.xlabel('Predicted label Johor')
 st.pyplot(fig26)
 
-"""Figure 23: Confusion Matrix for Johor State using Decision Tree Classification """
+"""Figure 27: Confusion Matrix for Johor State using Decision Tree Classification """
 
 #Selangor Classifier
 clf_selangor = DecisionTreeClassifier(criterion="entropy", max_depth=5)
@@ -957,7 +964,7 @@ plt.ylabel('Actual label Selangor')
 plt.xlabel('Predicted label Selangor')
 st.pyplot(fig27)
 
-"""Figure 24: Confusion Matrix for Selangor State using Decision Tree Classification """
+"""Figure 28: Confusion Matrix for Selangor State using Decision Tree Classification """
 
 """Decision Tree Classification performace comparision for each state"""
 
