@@ -743,6 +743,9 @@ Based on the 2 data frames above, it can be concluded that MLP performs better i
 
 """
 # Classification
+
+Classification is done to predict the increasing(1) or decreasing(0) of the daily cases. Two of the classification models have been used which are:
+
 1. **Logistic Regression**
 2. **Desicion Tree Classification**
 
