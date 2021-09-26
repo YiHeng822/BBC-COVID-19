@@ -288,7 +288,7 @@ st.image("./figure/8.png")
 
 In this section, we opt to discover the correlation of Pahang and Johor with other states. In other words, **what are the states that exhibit a strong correlation with (i)Pahang, and (ii)Johor**? Daily new cases are chosen as the interest of the correlation analysis.
 
-A new data frame is prepared where daily new cases for each state are extracted and merged into a new data frame to have 16 *states* in columns and *cases_new* in rows. Unused columns from the original data frame which is ['state', 'cases_import', 'cases_recovered'] are dropped. The final data frame as shown below is used for correlation analysis.
+A new data frame is prepared where daily new cases for each state are extracted and merged into a new data frame to have 16 *states* in columns and *cases_new* as rows. Unused columns from the original data frame which is ['state', 'cases_import', 'cases_recovered'] are dropped. The final data frame as shown below is used for correlation analysis.
 """
 
 state = [] 
@@ -307,12 +307,17 @@ for i in range (15):
 
 st.dataframe(result.head(5))
 
-"""Data Frame 12: The new data frame that have been created to perform correlation analysis"""
+"""
+Data Frame 12: The new data frame that have been created to perform correlation analysis
+
+After that, correlation analysis is done and the scores are presented in the following data frame.
+"""
 
 corrM = result.corr()
 st.dataframe(corrM.head(2))
 
-"""Data Frame 13: Correlation table for the data frame
+"""
+Data Frame 13: Correlation table for Johor and Pahang with other states
 
 From the table above, it can be noticed that several states are strongly correlated with Johor which are Penang, Perak, and Terengganu because their correlation score is close to 1 which indicates that they are strongly correlated with Johor in terms of new daily cases.
 
@@ -373,11 +378,12 @@ for i in range(4):
   
 st.dataframe(merge[0].head(5))
 
-"""Data Frame 14: The data frame of Pahang prepared for feature selection
+"""
+Data Frame 14: The data frame of Pahang prepared for feature selection
 
 A total of 15 features are to be evaluated to predict the daily new cases for each state. The 15 features will be fed into Boruta and RFE feature selector and the best 5 features will be chosen base on their score. The features are then used in our predictive model to predict the daily cases of the states.
 
-Before the data can be used as the input of the feature selector, the data frames are split into features(x) and labels(y). In our case, there will be 15 features from *tests_state and hospital* and 1 label *cases_new*. Moreover, unused columns such as *date* are dropped from the data frames.
+Before the data can be used as the input of the feature selector, the data frames are split into features(x) and labels(y). In our case, there will be 15 features from *tests_state* and *hospital* and 1 label *cases_new*. Moreover, unused columns such as *date* are dropped from the data frames.
 """
 
 #Pahang boruta feature score
@@ -514,7 +520,7 @@ st.image("./figure/16.png")
 
 # Predictive Modelling
 
-After peforming feature selection on the dataframes, few features have been selected by different method. We will select the features that have high score in both Boruta and RFE method to fit into our predictive model for each state in order to increase the accuracy and reduce training time of the model.
+After performing feature selection on the data, few features have been selected by their performance. We will select the features that have a high score in both the Boruta and RFE methods to fit into our predictive model for each state to increase the accuracy and reduce the training time of the model.
 """
 
 # Preparing data for Pahang
@@ -616,7 +622,7 @@ Figure 20: Top 5 features of Selangor State
 
 The figure above shows the top 5 features chosen for Selangor state based on Boruta score to fit in our model later which were *RTk_test_Selangor, PCR_Selangor, admitted_covid, admitted_total, discharged_pui.*
 """
-st.info("NOTE: Due to Selangor state data is unable to fit into RFE, the top 5 features for Selangor is choosen based on Boruta score only")
+st.info("NOTE: Due to Selangor state data is unable to fit into RFE, the top 5 features for Selangor is chosen based on Boruta score only")
 
 """
 # Regression
@@ -671,6 +677,9 @@ data = {"Mean squared error":[mlr_reg_mse_ph, mlr_reg_mse_kd, mlr_reg_mse_jh, ml
         "R^2 score":[mlr_reg_r2_ph, mlr_reg_r2_kd, mlr_reg_r2_jh,mlr_reg_r2_sl]}
 mlp_reg_score = pd.DataFrame(data, index = states)
 st.dataframe(mlp_reg_score)
+"""
+Data Frame 17: Data frame of the performance score for MLR
+"""
 
 """### Decision Tree Regression"""
 
@@ -727,18 +736,19 @@ dt_reg_score = pd.DataFrame(data, index=states)
 st.dataframe(dt_reg_score)
 
 """
-Data Frame 22: Dataframe of top 5 features of Selangor State
+Data Frame 18: Data frame of the performance score for DTR
+
+Based on the 2 data frames above, it can be concluded that MLP performs better in predicting the number of daily new cases, especially on Johor. Both regression models are not performing well for Selangor data and one of the possible reasons is the presence of outliers where mean squared error and mean absolute error are sensitive to it.
 """
 
 """
-
 # Classification
-1. Logistic regression
-2. Desicion tree classification
+1. **Logistic Regression**
+2. **Desicion Tree Classification**
 
 ### Logistic Regression
 """
-st.info("The top left of the confusion matrix indicates True Negative(Actual label is 0 and Predicted label is 0), the top right of the confusion matrix indicates False Positive(Actual label is 0 and Predicted label is 1),  the bottom left of the confusion matrix indicates False Negative(Actual label is 1 and Predicted label is 0), the bottom right of the confusion matrix indicates True Positive(Actual label is 1 and predicted label is 1). Hence, the top left and bottom right of the confusion matrix represent correct predictions whereas the top right and bottom left of the confusion matrix represent wrong predictions")
+st.info("The top left of the confusion matrix indicates True Negative (Actual label is 0 and Predicted label is 0), the top right of the confusion matrix indicates False Positive (Actual label is 0 and Predicted label is 1), the bottom left of the confusion matrix indicates False Negative (Actual label is 1 and Predicted label is 0), the bottom right of the confusion matrix indicates True Positive (Actual label is 1 and predicted label is 1). Hence, the top left and bottom right of the confusion matrix represent correct predictions whereas the top right and bottom left of the confusion matrix represent wrong predictions.")
 
 # Pahang Logistic Regression
 log_reg_p = LogisticRegression()
@@ -844,7 +854,6 @@ plt.xlabel('Predicted label Selangor')
 st.pyplot(fig23)
 """Figure 24: Confusion Matrix for Selangor State using Logistic Regression"""
 
-"""Logistic Regression performace comparision for each state"""
 states = [["Pahang", "Kedah", "Johor","Selangor"]]
 data = {"Accuracy":[log_pahang_accuracy, log_kedah_accuracy, log_johor_accuracy, log_selangor_accuracy],
         "Precision":[log_pahang_precision, log_kedah_precision, log_johor_precision, log_selangor_precision],
@@ -852,7 +861,9 @@ data = {"Accuracy":[log_pahang_accuracy, log_kedah_accuracy, log_johor_accuracy,
 log_reg_score = pd.DataFrame(data, index=states)
 st.dataframe(log_reg_score)
 
-"""The table shows the peformance of logistic regression on predicting increasing or decreasing cases for each state."""
+"""Data Frame 19: Logistic Regression performace comparision for each state"""
+
+"""The data frame shows the performance of logistic regression on predicting increasing or decreasing cases for each state."""
 
 """ ### Decision Tree Classification """
 st.info("The top left of the confusion matrix indicates True Negative(Actual label is 0 and Predicted label is 0), the top right of the confusion matrix indicates False Positive(Actual label is 0 and Predicted label is 1),  the bottom left of the confusion matrix indicates False Negative(Actual label is 1 and Predicted label is 0), the bottom right of the confusion matrix indicates True Positive(Actual label is 1 and predicted label is 1). Hence, the top left and bottom right of the confusion matrix represent correct predictions whereas the top right and bottom left of the confusion matrix represent wrong predictions")
@@ -966,8 +977,6 @@ st.pyplot(fig27)
 
 """Figure 28: Confusion Matrix for Selangor State using Decision Tree Classification """
 
-"""Decision Tree Classification performace comparision for each state"""
-
 states = [["Pahang", "Kedah", "Johor","Selangor"]]
 data = {"Accuracy":[dc_pahang_accuracy, dc_kedah_accuracy, dc_johor_accuracy, dc_selangor_accuracy],
         "Precision":[dc_pahang_precision, dc_kedah_precision, dc_johor_precision, dc_selangor_precision],
@@ -975,8 +984,10 @@ data = {"Accuracy":[dc_pahang_accuracy, dc_kedah_accuracy, dc_johor_accuracy, dc
 dc_score = pd.DataFrame(data, index=states)
 st.dataframe(dc_score)
 
-""" 
-DataThe table shows the peformance of Desicion Tree classification on predicting increasing or decreasing cases for each state.
+"""
+Data Frame 20: Decision Tree Classification performace comparision for each state
 
-Overall, among the 2 classification models, Decision Tree Classification is a better model in predicting increases or decreases of daily cases because the overall accuracy, precision and recall score for each state is higher than Logistic Regression.
+The data frame shows the performance of decision tree classification on predicting increasing or decreasing cases for each state.
+
+Overall, among the 2 classification models, decision tree classification is a better model in predicting increases or decreases of daily cases because the overall accuracy, precision and recall score for each state is higher than logistic regression.
 """
